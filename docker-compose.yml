@@ -1,0 +1,22 @@
+# docker-compose.yml (updated)
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Docker
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONPATH=/app
+    networks:
+      - default
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+networks:
+  default:
+    driver: bridge
